@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import {
+  Image,
   FileText,
   Eye,
   EyeOff,
@@ -65,103 +66,119 @@ export const FileList: React.FC<FileListProps> = ({
   }
 
   return (
-    <ScrollArea className="h-[400px] sm:h-[500px] rounded-md mr-2">
+    <ScrollArea className="h-[400px] sm:h-[500px] rounded-md">
       <ul className="space-y-4">
-        {uploadedFiles.map((file) => (
-          <li
-            key={file.id}
-            className="transition-all duration-200 hover:translate-y-[-2px]"
-          >
-            <Card className="mr-3 sm:mr-0 overflow-hidden bg-gray-700/40 border border-gray-600 shadow-md hover:shadow-lg transition-all duration-300">
-              <div className="p-4 sm:p-5">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                  <div className="flex items-start space-x-3">
-                    <div className="bg-gray-700 p-2 rounded-lg flex-shrink-0">
-                      <FileText className="h-6 w-6 text-cyan-300" />
-                    </div>
-                    <div className="min-w-0">
-                      <h4 className="font-medium text-white line-clamp-1 text-sm sm:text-base">
-                        {file.filename}
-                      </h4>
-                      <div className="flex flex-wrap items-center mt-1 text-xs text-cyan-200/70 gap-2 sm:gap-3">
-                        <span className="flex items-center">
-                          <Clock className="h-3 w-3 mr-1" />
-                          {formatDate(file.created_at)}
-                        </span>
-                        <Badge
-                          variant="outline"
-                          className="font-normal text-xs border-gray-600 text-cyan-200 bg-gray-700/50"
-                        >
-                          {formatFileSize(file.size)}
-                        </Badge>
-                        {file.is_duplicate && (
+        {uploadedFiles.map((file) => {
+          // Determine the icon based on the file type
+          const getFileIcon = (filename: string) => {
+            const extension = filename.split(".").pop()?.toLowerCase();
+            if (
+              ["jpg", "jpeg", "png", "gif", "bmp", "svg", "webp"].includes(
+                extension || ""
+              )
+            ) {
+              return <Image className="h-6 w-6 text-cyan-300" />;
+            }
+            return <FileText className="h-6 w-6 text-cyan-300" />;
+          };
+
+          return (
+            <li
+              key={file.id}
+              className="transition-all duration-200 hover:translate-y-[-2px]"
+            >
+              <Card className="mr-3 sm:mr-0 overflow-hidden bg-gray-700/40 border border-gray-600 shadow-md hover:shadow-lg transition-all duration-300">
+                <div className="p-4 sm:p-5">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div className="flex items-start space-x-3">
+                      <div className="bg-gray-700 p-2 rounded-lg flex-shrink-0">
+                        {/* Render the appropriate icon */}
+                        {getFileIcon(file.filename)}
+                      </div>
+                      <div className="min-w-0">
+                        <h4 className="font-medium text-white line-clamp-1 text-sm sm:text-base">
+                          {file.filename}
+                        </h4>
+                        <div className="flex flex-wrap items-center mt-1 text-xs text-cyan-200/70 gap-2 sm:gap-3">
+                          <span className="flex items-center">
+                            <Clock className="h-3 w-3 mr-1" />
+                            {formatDate(file.created_at)}
+                          </span>
                           <Badge
-                            variant="secondary"
-                            className="font-normal text-xs bg-red-800/50 text-red-200 border-red-800/50"
+                            variant="outline"
+                            className="font-normal text-xs border-gray-600 text-cyan-200 bg-gray-700/50"
                           >
-                            Duplicate
+                            {formatFileSize(file.size)}
                           </Badge>
-                        )}
+                          {file.is_duplicate && (
+                            <Badge
+                              variant="secondary"
+                              className="font-normal text-xs bg-red-800/50 text-red-200 border-red-800/50"
+                            >
+                              Duplicate
+                            </Badge>
+                          )}
+                        </div>
                       </div>
                     </div>
-                  </div>
 
-                  <div className="flex space-x-1 sm:space-x-2 self-start sm:self-auto">
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      onClick={() => togglePreview(file.id)}
-                      className="h-8 w-8 text-cyan-300 hover:text-white hover:bg-gray-600 rounded-full"
-                    >
-                      {previewFileId === file.id ? (
-                        <EyeOff className="h-4 w-4" />
-                      ) : (
-                        <Eye className="h-4 w-4" />
-                      )}
-                    </Button>
-
-                    <Button
-                      asChild
-                      variant="ghost"
-                      size="icon"
-                      className="h-8 w-8 text-cyan-300 hover:text-white hover:bg-gray-600 rounded-full"
-                    >
-                      <a
-                        href={file.signedUrl || "#"}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label="Download"
+                    <div className="flex space-x-1 sm:space-x-2 self-start sm:self-auto">
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => togglePreview(file.id)}
+                        className="h-8 w-8 text-cyan-300 hover:text-white hover:bg-gray-600 rounded-full"
                       >
-                        <Download className="h-4 w-4" />
-                      </a>
-                    </Button>
+                        {previewFileId === file.id ? (
+                          <EyeOff className="h-4 w-4" />
+                        ) : (
+                          <Eye className="h-4 w-4" />
+                        )}
+                      </Button>
 
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      onClick={() => handleDelete(file.id, file.filename)}
-                      className="h-8 w-8 text-red-400 hover:text-red-300 hover:bg-gray-600 rounded-full"
-                    >
-                      <Trash2 className="h-4 w-4" />
-                    </Button>
+                      <Button
+                        asChild
+                        variant="ghost"
+                        size="icon"
+                        className="h-8 w-8 text-cyan-300 hover:text-white hover:bg-gray-600 rounded-full"
+                      >
+                        <a
+                          href={file.signedUrl || "#"}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label="Download"
+                        >
+                          <Download className="h-4 w-4" />
+                        </a>
+                      </Button>
+
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => handleDelete(file.id, file.filename)}
+                        className="h-8 w-8 text-red-400 hover:text-red-300 hover:bg-gray-600 rounded-full"
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </Button>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              {previewFileId === file.id && file.signedUrl && (
-                <div className="border-t border-gray-600 bg-gray-700/30 transition-all duration-300">
-                  <div className="p-4">
-                    <iframe
-                      src={file.signedUrl}
-                      title={file.filename}
-                      className="w-full h-[300px] sm:h-[400px] rounded-md border border-gray-600 shadow-sm bg-gray-800"
-                    />
+                {previewFileId === file.id && file.signedUrl && (
+                  <div className="border-t border-gray-600 bg-gray-700/30 transition-all duration-300">
+                    <div className="p-4">
+                      <iframe
+                        src={file.signedUrl}
+                        title={file.filename}
+                        className="w-full h-[300px] sm:h-[400px] rounded-md border border-gray-600 shadow-sm bg-gray-800"
+                      />
+                    </div>
                   </div>
-                </div>
-              )}
-            </Card>
-          </li>
-        ))}
+                )}
+              </Card>
+            </li>
+          );
+        })}
       </ul>
     </ScrollArea>
   );
