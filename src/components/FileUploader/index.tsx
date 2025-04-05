@@ -143,7 +143,7 @@ const FileUploader: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-cyan-800 flex items-center justify-center p-4 sm:p-6">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-cyan-800 flex items-center justify-center sm:p-6">
       <Card className="w-full max-w-4xl bg-gray-800/90 backdrop-blur-lg border border-gray-700 shadow-2xl overflow-hidden transition-all duration-300">
         <CardHeader className="bg-gradient-to-r from-gray-800 via-blue-900 to-cyan-500 text-white p-6 sm:p-8 border-b border-gray-700">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
@@ -166,7 +166,7 @@ const FileUploader: React.FC = () => {
         </CardHeader>
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <div className="px-6 pt-6">
+          <div className="px-2 pt-6 sm:px-6">
             <TabsList className="grid w-full grid-cols-2 mb-2 p-1 bg-gray-700/50">
               <TabsTrigger
                 value="upload"
@@ -193,7 +193,7 @@ const FileUploader: React.FC = () => {
             </TabsList>
           </div>
 
-          <CardContent className="p-6">
+          <CardContent className="p-2 sm:p-6">
             <TabsContent value="upload" className="mt-0 space-y-6">
               <UploadSection
                 files={files}
@@ -207,7 +207,7 @@ const FileUploader: React.FC = () => {
 
             <TabsContent value="library" className="mt-0">
               <div className="space-y-4">
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between p-4">
                   <h3 className="text-lg font-medium text-cyan-100 flex items-center">
                     <FileText className="mr-2 h-5 w-5 text-cyan-300" />
                     Your Documents
@@ -227,7 +227,7 @@ const FileUploader: React.FC = () => {
                     Refresh
                   </Button>
                 </div>
-                <Separator className="my-4 bg-gray-700" />
+                <Separator className="bg-gray-700" />
                 <FileList
                   uploadedFiles={uploadedFiles}
                   loading={loading}

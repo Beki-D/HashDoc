@@ -51,8 +51,7 @@ export const FileList: React.FC<FileListProps> = ({
           No documents uploaded yet
         </p>
         <p className="text-sm mt-1 text-cyan-300/70 text-center max-w-xs">
-          Upload your first PDF document to get started with your secure
-          document vault
+          Upload your first PDF/Image document to get started with HashDoc
         </p>
         <Button
           className="mt-6 bg-cyan-700 hover:bg-cyan-600 text-white shadow-lg shadow-cyan-700/30"
@@ -66,14 +65,14 @@ export const FileList: React.FC<FileListProps> = ({
   }
 
   return (
-    <ScrollArea className="h-[400px] sm:h-[500px] rounded-md pr-4">
+    <ScrollArea className="h-[400px] sm:h-[500px] rounded-md mr-2">
       <ul className="space-y-4">
         {uploadedFiles.map((file) => (
           <li
             key={file.id}
             className="transition-all duration-200 hover:translate-y-[-2px]"
           >
-            <Card className="overflow-hidden bg-gray-700/40 border border-gray-600 shadow-md hover:shadow-lg transition-all duration-300">
+            <Card className="mr-3 sm:mr-0 overflow-hidden bg-gray-700/40 border border-gray-600 shadow-md hover:shadow-lg transition-all duration-300">
               <div className="p-4 sm:p-5">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                   <div className="flex items-start space-x-3">
@@ -107,7 +106,7 @@ export const FileList: React.FC<FileListProps> = ({
                     </div>
                   </div>
 
-                  <div className="flex space-x-1 sm:space-x-2 self-end sm:self-auto">
+                  <div className="flex space-x-1 sm:space-x-2 self-start sm:self-auto">
                     <Button
                       variant="ghost"
                       size="icon"

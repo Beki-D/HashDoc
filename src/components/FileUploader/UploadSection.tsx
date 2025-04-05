@@ -22,10 +22,10 @@ export const UploadSection: React.FC<UploadSectionProps> = ({
 }) => {
   return (
     <div className="space-y-4">
-      <div className="bg-gray-700/40 backdrop-blur-sm p-6 rounded-xl border border-gray-600 shadow-sm">
+      <div className="bg-gray-700/40 backdrop-blur-sm p-4 rounded-xl border border-gray-600 shadow-sm">
         <h3 className="text-lg font-medium text-cyan-100 mb-4 flex items-center">
           <FileUp className="mr-2 h-5 w-5 text-cyan-300" />
-          Upload a PDF Document or an Image
+          Upload a PDF/Image Doc
         </h3>
 
         <FilePond
