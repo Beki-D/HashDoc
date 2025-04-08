@@ -207,7 +207,7 @@ const FileUploader: React.FC = () => {
 
             <TabsContent value="library" className="mt-0">
               <div className="space-y-4">
-                <div className="flex items-center justify-between p-4">
+                <div className="flex items-center justify-between px-4">
                   <h3 className="text-lg font-medium text-cyan-100 flex items-center">
                     <FileText className="mr-2 h-5 w-5 text-cyan-300" />
                     Your Documents

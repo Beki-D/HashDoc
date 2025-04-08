@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
 import FileUpload from "@/components/FileUploader";
+// import AssetViewer from "./components/AssetViewer";
+// import pdfFile from "./assets/sample.pdf";
+// import imageFile from "./assets/pp.jpg";
 
 function App() {
   const [isOnline, setIsOnline] = useState(navigator.onLine);
@@ -26,6 +29,13 @@ function App() {
   }, []);
   return (
     <div className="relative min-h-screen min-w-screen">
+      {/* <div className="space-y-8 p-4">
+        <h2 className="text-xl font-semibold">PDF Viewer</h2>
+        <AssetViewer src={pdfFile} />
+
+        <h2 className="text-xl font-semibold">Image Viewer</h2>
+        <AssetViewer src={imageFile} />
+      </div> */}
       <FileUpload />
 
       {/* Network status indicator */}

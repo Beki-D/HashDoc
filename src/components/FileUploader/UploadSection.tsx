@@ -34,8 +34,7 @@ export const UploadSection: React.FC<UploadSectionProps> = ({
           allowMultiple={false}
           maxFiles={1}
           acceptedFileTypes={["application/pdf", "image/*"]}
-          filePosterHeight={120}
-          labelIdle='Drag & Drop your PDF or Image or <span class="filepond--label-action text-cyan-300 font-medium">Browse</span>'
+          labelIdle='Drag & Drop your PDF/Image or <span class="filepond--label-action text-gray-700 font-bold">Browse</span>'
           className="rounded-xl filepond--panel-root bg-gray-700/50 border border-gray-600"
           credits={false}
         />
@@ -46,7 +45,6 @@ export const UploadSection: React.FC<UploadSectionProps> = ({
               <span>Calculating hash...</span>
             </div>
             <Progress value={33} className="h-2 bg-gray-700" />{" "}
-            {/* Indeterminate progress */}
           </div>
         )}
 

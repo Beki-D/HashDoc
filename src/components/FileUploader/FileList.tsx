@@ -15,6 +15,7 @@ import {
   Loader2,
 } from "lucide-react";
 import { formatDate, formatFileSize } from "@/lib/utils";
+import { FilePreview } from "./FilePreview";
 
 interface FileListProps {
   uploadedFiles: FileRecord[];
@@ -164,17 +165,7 @@ export const FileList: React.FC<FileListProps> = ({
                   </div>
                 </div>
 
-                {previewFileId === file.id && file.signedUrl && (
-                  <div className="border-t border-gray-600 bg-gray-700/30 transition-all duration-300">
-                    <div className="p-4">
-                      <iframe
-                        src={file.signedUrl}
-                        title={file.filename}
-                        className="w-full h-[300px] sm:h-[400px] rounded-md border border-gray-600 shadow-sm bg-gray-800"
-                      />
-                    </div>
-                  </div>
-                )}
+                {previewFileId === file.id && <FilePreview file={file} />}
               </Card>
             </li>
           );
