@@ -67,10 +67,10 @@ export const FileList: React.FC<FileListProps> = ({
   }
 
   return (
-    <ScrollArea className="h-[400px] sm:h-[500px] rounded-md">
+    <ScrollArea className="h-[600px] sm:h-[430px] rounded-md pr-2.5">
       <ul className="space-y-4">
         {uploadedFiles.map((file) => {
-          // Determine the icon based on the file type
+          // Determine icon based on file type
           const getFileIcon = (filename: string) => {
             const extension = filename.split(".").pop()?.toLowerCase();
             if (
@@ -88,18 +88,34 @@ export const FileList: React.FC<FileListProps> = ({
               key={file.id}
               className="transition-all duration-200 hover:translate-y-[-2px]"
             >
-              <Card className="mr-3 sm:mr-0 overflow-hidden bg-gray-700/40 border border-gray-600 shadow-md hover:shadow-lg transition-all duration-300">
-                <div className="p-4 sm:p-5">
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <Card className="overflow-hidden bg-gray-700/40 border border-gray-600 shadow-md hover:shadow-lg transition-all duration-300">
+                <div className="p-3 sm:p-5">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
                     <div className="flex items-start space-x-3">
                       <div className="bg-gray-700 p-2 rounded-lg flex-shrink-0">
                         {/* Render the appropriate icon */}
                         {getFileIcon(file.filename)}
                       </div>
                       <div className="min-w-0">
-                        <h4 className="font-medium text-white line-clamp-1 text-sm sm:text-base">
-                          {file.filename}
-                        </h4>
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <h4 className="font-medium text-white max-w-52 truncate text-sm sm:max-w-none sm:text-base">
+                            {file.filename.replace(
+                              /(.+)(\.[^\.]+)$/,
+                              (_, name, ext) =>
+                                name.length > 25
+                                  ? `${name.substring(0, 25)}...${ext}`
+                                  : name + ext
+                            )}
+                          </h4>
+                          {file.is_duplicate && (
+                            <Badge
+                              variant="secondary"
+                              className="font-normal text-xs bg-red-800/50 text-red-200 border-red-800/50"
+                            >
+                              Duplicate
+                            </Badge>
+                          )}
+                        </div>
                         <div className="flex flex-wrap items-center mt-1 text-xs text-cyan-200/70 gap-2 sm:gap-3">
                           <span className="flex items-center">
                             <Clock className="h-3 w-3 mr-1" />
@@ -111,14 +127,6 @@ export const FileList: React.FC<FileListProps> = ({
                           >
                             {formatFileSize(file.size)}
                           </Badge>
-                          {file.is_duplicate && (
-                            <Badge
-                              variant="secondary"
-                              className="font-normal text-xs bg-red-800/50 text-red-200 border-red-800/50"
-                            >
-                              Duplicate
-                            </Badge>
-                          )}
                         </div>
                       </div>
                     </div>
