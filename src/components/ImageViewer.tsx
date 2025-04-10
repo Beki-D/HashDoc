@@ -239,7 +239,7 @@ const ImageViewer: React.FC<ImageViewerProps> = ({ imageUrl }) => {
 
   return (
     <div
-      className="relative w-full h-full overflow-hidden bg-gray-100 touch-none"
+      className="relative w-full h-full max-w-full overflow-hidden bg-gray-100 touch-none"
       onMouseDown={handleDragStart}
       onMouseMove={handleDragMove}
       onMouseUp={handleDragEnd}
@@ -261,7 +261,7 @@ const ImageViewer: React.FC<ImageViewerProps> = ({ imageUrl }) => {
       <img
         src={imageUrl}
         alt="Preview"
-        className="max-w-none object-contain transition-transform"
+        className="max-w-full object-contain transition-transform"
         style={{
           transform: `translate(${position.x}px, ${position.y}px) scale(${scale}) rotate(${rotation}deg)`,
           transformOrigin: "center center",
