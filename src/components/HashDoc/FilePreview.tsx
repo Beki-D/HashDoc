@@ -18,7 +18,7 @@ const SUPPORTED_IMAGE_EXTENSIONS = [
 ];
 
 export const FilePreview: React.FC<FilePreviewProps> = ({ file }) => {
-  const { isOnline, statusMessage } = useNetworkStatus();
+  const { isOnline } = useNetworkStatus();
 
   // Determine if the file is an image based on its extension
   const isImage = file.filename
@@ -56,7 +56,7 @@ export const FilePreview: React.FC<FilePreviewProps> = ({ file }) => {
         ) : (
           <div className="w-full h-[300px] sm:h-[400px] flex items-center justify-center text-cyan-300 bg-gray-800 rounded-md border border-gray-600">
             {file.signedUrl
-              ? statusMessage || "Preview unavailable offline"
+              ? "Preview unavailable offline"
               : "Invalid preview URL"}
           </div>
         )}
