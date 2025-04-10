@@ -2,6 +2,7 @@
 import React from "react";
 import { FileRecord } from "@/lib/supabase/types";
 import ImageViewer, { Toolbar } from "@/components/ImageViewer";
+import { useNetworkStatus } from "@/lib/useNetworkStatus";
 
 interface FilePreviewProps {
   file: FileRecord;
@@ -17,7 +18,7 @@ const SUPPORTED_IMAGE_EXTENSIONS = [
 ];
 
 export const FilePreview: React.FC<FilePreviewProps> = ({ file }) => {
-  const isOnline = navigator.onLine;
+  const { isOnline, statusMessage } = useNetworkStatus();
 
   // Determine if the file is an image based on its extension
   const isImage = file.filename
@@ -55,7 +56,7 @@ export const FilePreview: React.FC<FilePreviewProps> = ({ file }) => {
         ) : (
           <div className="w-full h-[300px] sm:h-[400px] flex items-center justify-center text-cyan-300 bg-gray-800 rounded-md border border-gray-600">
             {file.signedUrl
-              ? "Preview unavailable offline"
+              ? statusMessage || "Preview unavailable offline"
               : "Invalid preview URL"}
           </div>
         )}
