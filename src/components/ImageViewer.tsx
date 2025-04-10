@@ -1,3 +1,4 @@
+// src/components/ImageViewer.tsx
 import React, { useState, useCallback } from "react";
 import {
   RotateCw,

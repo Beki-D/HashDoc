@@ -1,3 +1,4 @@
+// src/components/FileUploader/FilePreview.tsx
 import React from "react";
 import { FileRecord } from "@/lib/supabase/types";
 import ImageViewer, { Toolbar } from "@/components/ImageViewer";

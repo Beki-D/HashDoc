@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import FileUpload from "@/components/FileUploader";
+import { HashDoc } from "@/components/HashDoc";
 
 function App() {
   const [isOnline, setIsOnline] = useState(navigator.onLine);
@@ -26,7 +26,7 @@ function App() {
   }, []);
   return (
     <div className="relative min-h-screen min-w-screen">
-      <FileUpload />
+      <HashDoc />
 
       {/* Network status indicator */}
       <div className="fixed bottom-0 left-0 right-0 z-50">
